@@ -4,8 +4,8 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 
-// #define configUSE_PREEMPTION 1       Espressif\frameworks\esp-idf-v4.4.2\components\freertos\include\freertos\FreeRTOS.h
-// #define configUSE_TIME_SLICING 1     Espressif\frameworks\esp-idf-v4.4.2\components\freertos\include\esp_additions\freertos\FreeRTOSConfig.h
+#define configUSE_PREEMPTION 1       Espressif\frameworks\esp-idf-v4.4.2\components\freertos\include\freertos\FreeRTOS.h
+#define configUSE_TIME_SLICING 1     Espressif\frameworks\esp-idf-v4.4.2\components\freertos\include\esp_additions\freertos\FreeRTOSConfig.h
 
 volatile uint32_t ulIdleCycleCount = 0UL;
 

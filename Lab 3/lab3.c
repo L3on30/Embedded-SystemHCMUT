@@ -14,37 +14,6 @@ volatile uint32_t ulIdleTask2Count = 0UL;
 volatile uint32_t ulIdleTask3Count = 0UL;
 // =============================================
 
-void vApplicationIdleHook( void )
-{
-        ulIdleCycleCount++;
-}
-
-void func_1(void *pvParameter)
-{
-    while (1)
-    {
-        if (configUSE_PREEMPTION == 0)
-        {
-            ulIdleTask1Count++;
-            if (ulIdleTask1Count == 2)
-            {
-                xTaskCreatePinnedToCore(&func_2,"task2",1024*5,NULL,2,NULL,0);
-            }
-            else if (ulIdleTask1Count == 4)
-            {
-                xTaskCreatePinnedToCore(&func_3,"task3",1024*5,NULL,5,NULL,0);
-            }
-            vTaskDelay(pdMS_TO_TICKS(1000));
-        }
-        else 
-        {
-            printf("==============|| %d \n", ulIdleTask2Count);
-            printf("=======|| %d \n", ulIdleTask3Count);
-            vTaskDelay(pdMS_TO_TICKS(2000));
-        }
-    }
-}
-
 void func_2(void *pvParameter)
 {
     int count = 0;
@@ -89,6 +58,32 @@ void func_3(void *pvParameter)
     }
 }
 
+void func_1(void *pvParameter)
+{
+    while (1)
+    {
+        if (configUSE_PREEMPTION == 0)
+        {
+            ulIdleTask1Count++;
+            if (ulIdleTask1Count == 2)
+            {
+                xTaskCreatePinnedToCore(&func_2,"task2",1024*5,NULL,2,NULL,0);
+            }
+            else if (ulIdleTask1Count == 4)
+            {
+                xTaskCreatePinnedToCore(&func_3,"task3",1024*5,NULL,5,NULL,0);
+            }
+            vTaskDelay(pdMS_TO_TICKS(1000));
+        }
+        else 
+        {
+            printf("==============|| %d \n", ulIdleTask2Count);
+            printf("=======|| %d \n", ulIdleTask3Count);
+            vTaskDelay(pdMS_TO_TICKS(2000));
+        }
+    }
+}
+
 void app_main()
 {
     printf("Preemption : %d \n",configUSE_PREEMPTION);
@@ -105,4 +100,3 @@ void app_main()
         xTaskCreatePinnedToCore(&func_3,"task3",1024*5,NULL,0,NULL,0);
     }
 }
-

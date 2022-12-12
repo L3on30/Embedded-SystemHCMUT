@@ -31,13 +31,11 @@ void reception(void *pvParameter)
 
 void func_3(Data_t requestReceived)
 {
-    if (Stored == NULL)
-    {
+    if (Stored == NULL){
         printf("func_3 is null\n");
         return;
     }
-    else
-    {
+    else{
         if ((requestReceived.Id > 2)){
             printf("\n\n func_3 Ignore ID: %d , Data: %d !!! \n\n", requestReceived.Id, requestReceived.Data);
         }
@@ -46,19 +44,15 @@ void func_3(Data_t requestReceived)
 
 void func_2(Data_t requestReceived)
 {
-    if (Stored == NULL)
-    {
+    if (Stored == NULL){
         printf("Stored is empty !!! \n");
         return;
     }
-    else
-    {
-        if (requestReceived.Id == 2)
-        {
+    else{
+        if (requestReceived.Id == 2){
             printf("\n\n func_2 ID: %d , Data: %d !!! \n\n", requestReceived.Id, requestReceived.Data);
-        }
-        else
-        {
+        } 
+	else{
             printf("error func_2 !!! \n");
             func_3(requestReceived);
         }
